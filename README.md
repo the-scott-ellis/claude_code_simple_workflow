@@ -1,4 +1,4 @@
-# Claude Workflow System
+# Claude Code Workflow System
 
 A lightweight, session-friendly workflow for AI-assisted development with Claude Code.
 
