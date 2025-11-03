@@ -32,10 +32,10 @@ For teams who want slash commands, scripts, and agents.
 cd your-project
 
 # Add as git submodule (recommended)
-git submodule add https://github.com/your-org/claude-workflow.git .claude-workflow
+git submodule add https://github.com/the-scott-ellis/claude_code_simple_workflow.git .claude-workflow
 
 # Or if not using submodules, clone directly:
-# git clone https://github.com/your-org/claude-workflow.git .claude-workflow
+# git clone https://github.com/the-scott-ellis/claude_code_simple_workflow.git .claude-workflow
 ```
 
 ### Step 2: Make Scripts Executable
@@ -100,7 +100,7 @@ Host this repository privately or publicly:
 ```bash
 # Create a new repo on GitHub
 # Push this workflow to it
-git remote add origin git@github.com:your-org/claude-workflow.git
+git remote add origin git@github.com:the-scott-ellis/claude_code_simple_workflow.git
 git push -u origin main
 ```
 
@@ -135,7 +135,7 @@ Create example projects showing the workflow in action. Team members can referen
 
 ```bash
 cd your-project
-git submodule add [workflow-repo-url] .claude-workflow
+git submodule add https://github.com/the-scott-ellis/claude_code_simple_workflow.git .claude-workflow
 .claude-workflow/scripts/init.sh
 ```
 
@@ -145,7 +145,7 @@ The init script will detect your `package.json` and auto-fill tech stack info.
 
 ```bash
 cd your-project
-git submodule add [workflow-repo-url] .claude-workflow
+git submodule add https://github.com/the-scott-ellis/claude_code_simple_workflow.git .claude-workflow
 .claude-workflow/scripts/init.sh
 ```
 

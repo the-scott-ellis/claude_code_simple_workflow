@@ -2,6 +2,33 @@
 
 A lightweight, session-friendly workflow for AI-assisted development with Claude Code.
 
+## Installation
+
+From your project root:
+
+```bash
+# Add as git submodule (recommended)
+git submodule add https://github.com/the-scott-ellis/claude_code_simple_workflow.git .claude-workflow
+
+# Make scripts executable
+chmod +x .claude-workflow/scripts/*.sh
+
+# Initialize the workflow
+.claude-workflow/scripts/init.sh
+```
+
+This creates:
+- `CLAUDE.md` - Pre-filled with detected project info + workflow instructions
+- `dev/features/` - Empty, ready for new features
+- `dev/done/` - For archived completed work
+
+**Next steps:**
+1. Edit `CLAUDE.md` to add your project-specific context
+2. Optional: Copy slash commands to your project: `cp -r .claude-workflow/.claude .`
+3. Start working: Open Claude Code and say "Let's plan out [your feature]"
+
+> **Note:** Other installation options (minimal setup, team configurations, different project types) are available in [INSTALL.md](INSTALL.md).
+
 ## Philosophy
 
 - **Low ceremony:** Minimal files, maximum clarity
@@ -113,57 +140,7 @@ Simple. Flexible. Actually gets used.
 
 ---
 
-## Getting Started
-
-### Quick Start
-
-1. **Create the structure** in your existing project:
-   ```bash
-   mkdir -p dev/features dev/done
-   ```
-
-2. **Create a CLAUDE.md file** at the root of your project with context about:
-   - What your project does
-   - Tech stack and conventions
-   - Current state and priorities
-   - How you prefer to work
-
-3. **Create your first feature file**:
-   ```bash
-   touch dev/features/my-first-feature.md
-   ```
-
-4. **Start working with Claude Code:**
-   ```
-   "Let's plan out the user authentication feature"
-   ```
-
-### Using with Claude Code
-
-This workflow is designed for [Claude Code](https://claude.com/claude-code), Anthropic's agentic coding environment.
-
-**Key benefits with Claude Code:**
-- Claude automatically reads `CLAUDE.md` to understand your project
-- Feature files provide session continuity across coding sessions
-- Slash commands (if configured) enforce consistent workflow
-- Sub-agents can quickly orient themselves using feature files
-
-### Optional: Install as Submodule
-
-For advanced teams who want pre-built slash commands and scripts:
-
-```bash
-# In your project root
-git submodule add https://github.com/your-org/claude-workflow.git .claude-workflow
-
-# Copy slash commands to your project (optional)
-cp -r .claude-workflow/.claude .
-
-# Initialize workflow structure
-mkdir -p dev/features dev/done
-```
-
-### What to Put in CLAUDE.md
+## What to Put in CLAUDE.md
 
 Your `CLAUDE.md` file should contain project context that helps Claude (and humans) understand your project:
 
