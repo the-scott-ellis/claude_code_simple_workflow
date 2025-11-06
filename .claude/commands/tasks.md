@@ -4,136 +4,50 @@ Read the feature plan and create a detailed technical breakdown with specific ta
 
 ## Your Task
 
-1. **Read the feature file:** `dev/features/<feature-name>.md`
-2. **Review the requirements** to understand what needs to be built
-3. **Read CLAUDE.md** for project context (stack, patterns, standards)
-4. **Design the technical approach:**
-   - What components/hooks/functions are needed?
-   - What files will be created/modified?
-   - What's the implementation strategy?
-5. **Break down into specific, actionable tasks**
-6. **Add the technical sections** to the existing feature file
+1. **Get the feature name** from command arguments (e.g., `/tasks dark-mode-toggle`)
+2. **Read the feature file:** `features/<feature-name>.md`
+3. **Ask any technical clarification questions** if needed using AskUserQuestion tool
+4. **Invoke the Technical Breakdown Agent** to create the detailed task breakdown
+5. **Review and create the updated `.active.md` file**
 
-## Sections to Add
+## Technical Breakdown Agent Invocation
 
-Add these sections to the existing feature file:
+After reading the feature file and gathering any needed clarifications, invoke the Technical Breakdown Agent:
 
-```markdown
-## Technical Approach
+Use the Task tool with:
+- `subagent_type`: "general-purpose"
+- `description`: "Create technical breakdown"
+- `prompt`: "You are the Technical Breakdown Agent from .agents/technical-agent.md. Create a detailed technical breakdown for the feature in features/[feature-name].md. First, explore the codebase to understand its structure, patterns, and relevant existing code. Then create a detailed task breakdown organized into sessions. Transform the file from .md to .active.md format with: metadata updates (Status: Active, Started date, Session: 1, Estimated Sessions), detailed task checklist grouped by sessions, Technical Notes section with architecture decisions and files to change, and Current State section. Return the complete updated feature file content."
 
-### Architecture
-[How will this be structured? What patterns will you use?]
+## After Agent Returns
 
-### Key Components
-- **Component/Hook/Function 1:** [What it does]
-- **Component/Hook/Function 2:** [What it does]
+1. **Review the technical breakdown** - Verify tasks are specific and well-organized
+2. **Create the new file** as `features/[feature-name].active.md`
+3. **Delete the old file** `features/[feature-name].md`
+4. **Tell the user:**
+```
+✅ Technical breakdown complete: [feature-name]
 
-### Dependencies
-[Are there any blockers? Prerequisites? External libraries needed?]
+Created: features/[feature-name].active.md
 
-## Tasks
+The breakdown includes:
+- [N] tasks across [X] sessions
+- Specific files identified: [count] new, [count] modified
+- Architecture and implementation approach
+- Potential challenges identified
 
-### Setup
-- [ ] [Any setup tasks?]
+Ready to start implementing!
+```
 
-### Implementation
-- [ ] [Specific task 1 - be detailed]
-- [ ] [Specific task 2 - name exact files]
-- [ ] [Specific task 3 - clear deliverable]
+## Important Notes
 
-### Testing
-- [ ] [Unit tests for component/hook]
-- [ ] [Integration tests if needed]
-- [ ] [Manual testing steps]
-
-### Documentation
-- [ ] [Update README if needed]
-- [ ] [Add JSDoc comments]
-
-**Estimated effort:** [X hours/days]
-
-## Files to Create/Modify
-
-**New files:**
-- `src/path/to/NewComponent.tsx`
-- `src/path/to/NewComponent.test.tsx`
-
-**Modified files:**
-- `src/path/to/ExistingFile.tsx` - Add new functionality
-- `src/path/to/OtherFile.tsx` - Integrate new component
+- The Technical Breakdown Agent explores the codebase first
+- It creates specific tasks with file paths
+- Tasks are organized into logical sessions
+- The file must be renamed from `.md` to `.active.md`
+- You handle file operations (read, create, delete)
+- Let the agent do the exploration and breakdown work
 
 ---
 
-**Next step:** Run `/start <feature-name>` to begin implementation.
-```
-
-## Important Rules
-
-✅ **Tasks should be:**
-- Specific (not vague like "implement feature")
-- Actionable (clear what to do)
-- Testable (clear when it's done)
-- Ordered logically (dependencies first)
-
-❌ **Avoid:**
-- Vague tasks like "build the thing"
-- Tasks that are too large (break them down)
-- Skipping testing tasks
-- Missing file paths
-
-## Good vs Bad Tasks
-
-**Good tasks:**
-```
-- [ ] Create src/hooks/useKeyboardShortcuts.ts with event listener logic
-- [ ] Add platform detection (Mac vs Windows) using navigator.platform
-- [ ] Write unit tests in src/hooks/useKeyboardShortcuts.test.ts
-- [ ] Import hook into src/components/MainLayout.tsx
-- [ ] Test shortcuts work in Chrome on Mac
-```
-
-**Bad tasks:**
-```
-- [ ] Make keyboard shortcuts work ← Too vague
-- [ ] Add code ← Not specific
-- [ ] Testing ← What kind? Where?
-```
-
-## After Updating the File
-
-Tell the user:
-```
-✅ Technical breakdown complete: <feature-name>
-
-Added to dev/features/<feature-name>.md:
-- Technical approach with [X] components/hooks
-- [Y] tasks broken down and ready
-- Estimated effort: [Z] hours
-
-Next step: Run /start <feature-name> to begin implementation.
-```
-
-## Example Output
-
-Show the user a summary:
-```
-Technical Approach:
-- Create useKeyboardShortcuts hook with event listeners
-- Integrate into MainLayout component
-- Use react-router's navigate() for routing
-- Add toast notifications via Sonner
-
-Tasks: 8 total
-- Setup: 0
-- Implementation: 5
-- Testing: 2
-- Documentation: 1
-
-Files: 2 new, 1 modified
-
-Ready to start? Run /start <feature-name>
-```
-
----
-
-Remember: Be thorough but realistic. Break large tasks into smaller steps.
+Remember: This is Phase 2 - technical planning. Implementation comes next when the developer starts working through the tasks.

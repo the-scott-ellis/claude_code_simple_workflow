@@ -4,90 +4,51 @@ Create a new feature file with requirements only. This is Phase 1 of 3.
 
 ## Your Task
 
-1. **Get the feature name** (if not provided, ask for it)
-2. **Gather requirements by asking clarifying questions:**
+1. **Get the feature description** from the command arguments (e.g., `/plan "add dark mode toggle"`)
+2. **Ask clarifying questions** using the AskUserQuestion tool:
    - What problem does this solve?
    - What are the core requirements?
    - What's in scope vs out of scope?
    - Any constraints or considerations?
    - Ask 3-5 targeted questions to fully understand WHAT to build
-3. **Create the feature file:** `dev/features/<feature-name>.md`
-4. **Fill ONLY the requirements section** (NO technical details yet)
+3. **Invoke the Planning Agent** to create the feature file
+4. **Show the result** to the user and create the file in `features/`
 
-## Template to Use
+## Planning Agent Invocation
 
-```markdown
-# <Feature Name>
+After gathering requirements through clarifying questions, invoke the Planning Agent:
 
-**Goal:** [One sentence description]
+Use the Task tool with:
+- `subagent_type`: "general-purpose"
+- `description`: "Plan new feature"
+- `prompt`: "You are the Planning Agent from .agents/planning-agent.md. Create a feature plan for: [feature description]. Use these clarifying answers: [user's answers]. Generate a complete feature file following the format in your agent file, including: Goal, Context, User Story, Acceptance Criteria, Technical Considerations, Out of Scope, and metadata (Status: Planned, Priority, Effort estimate, Created date). Return the complete feature file content and suggest a filename."
 
-**Priority:** [High/Medium/Low] | **Effort:** TBD | **Planned:** [Today's date]
+## After Agent Returns
 
-## Requirements
-
-### User wants:
-- [Requirement 1]
-- [Requirement 2]
-- [Requirement 3]
-
-### Success criteria:
-- [ ] [How do we know it's done?]
-- [ ] [What does success look like?]
-
-### Out of scope:
-- [What we're NOT building in this version]
-
-## Open Questions
-
-- [ ] [Any remaining questions?]
-
----
-
-**Next step:** Run `/tasks <feature-name>` to create technical breakdown and task list.
+1. **Review the agent's plan** - Ensure it captures requirements correctly
+2. **Create the feature file** in `features/[feature-name].md`
+3. **Tell the user:**
 ```
+✅ Feature planned: [feature-name]
 
-## Important Rules
+Created: features/[feature-name].md
 
-❌ **DO NOT include:**
-- Technical approach
-- Implementation details
-- Task breakdowns
-- File names or code
-
-✅ **DO include:**
-- Clear requirements
-- User needs
-- Acceptance criteria
+The plan includes:
+- Clear goal and user story
+- [N] acceptance criteria
+- Technical considerations
 - Scope boundaries
 
-## After Creating the File
-
-Tell the user:
-```
-✅ Feature planned: <feature-name>
-
-Requirements captured in dev/features/<feature-name>.md
-
-Next step: Run /tasks <feature-name> to break down into technical tasks.
+Next step: Run /tasks [feature-name] to create the technical breakdown.
 ```
 
-## Example
+## Important Notes
 
-Good (requirements only):
-```
-## Requirements
-- User can press Cmd+1/2/3 to navigate to main sections
-- Works on both Mac (Cmd) and Windows (Ctrl)
-- Shows toast notification when shortcut is used
-```
-
-Bad (too technical):
-```
-## Requirements
-- Create useKeyboardShortcuts hook with useEffect ← NO!
-- Add event listener in MainLayout component ← NO!
-```
+- The Planning Agent handles the file format and content structure
+- You handle user interaction (questions) and file creation
+- Focus on gathering good requirements through questions
+- Let the agent do the detailed planning work
 
 ---
 
-Remember: This is just requirements gathering. Technical planning comes in `/tasks`.
+Remember: This is Phase 1 - requirements and planning only. Technical breakdown comes in `/tasks`.
